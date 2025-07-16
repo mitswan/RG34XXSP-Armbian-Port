@@ -50,11 +50,18 @@ cd repos_to_update
 echo "Cloning armbian-build for development..."
 git clone https://github.com/armbian/build.git armbian-build
 
-cd ..
+echo "Setting up development branch..."
+cd armbian-build
+git remote add upstream https://github.com/armbian/build.git
+git checkout -b rg34xxsp-support
+echo "Created and switched to 'rg34xxsp-support' branch"
+
+cd ../..
 
 echo "Repository restoration complete!"
 echo ""
 echo "Reference repositories are in: repos_reference/"
 echo "Working repositories are in: repos_to_update/"
+echo "Development branch 'rg34xxsp-support' ready in: repos_to_update/armbian-build/"
 echo ""
 echo "To clean repositories again, run: ./clean_repos.sh"
