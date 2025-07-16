@@ -1,5 +1,7 @@
 # RG34XXSP Armbian Community Build Implementation Plan
 
+**Project Started**: July 15, 2025 (Device acquired few weeks prior for gaming)
+
 ## Documentation Reference Compliance
 
 **MANDATORY**: This plan has been created following the requirements in CLAUDE.md to reference:
@@ -9,7 +11,7 @@
 
 ## Project Overview
 
-This document outlines a phased approach to creating a community-maintained Armbian build for the ANBERNIC RG34XXSP handheld device. The implementation follows Armbian community guidelines to provide full general-purpose computing capabilities on this ARM-based hardware platform.
+This document outlines a phased approach to creating a community-maintained Armbian build for the ANBERNIC RG34XXSP handheld device. The implementation follows Armbian community guidelines to provide full general-purpose computing capabilities on this ARM-based hardware platform for IoT deployment use cases.
 
 ## Project Objectives
 
@@ -33,10 +35,12 @@ This document outlines a phased approach to creating a community-maintained Armb
 **Testing**: System boots, display shows console, USB keyboard works, basic Linux functionality
 
 #### Phase 1.1: Development Environment Setup
-- [ ] **Repository Setup**: Run `./clean_repos.sh` to clean repository directories
-- [ ] **Repository Setup**: Run `./restore_repos.sh` to restore all repositories
+- [ ] **Repository Setup**: Run `./helper_scripts/clean_repos.sh` to clean repository directories
+- [ ] **Repository Setup**: Run `./helper_scripts/restore_repos.sh` to restore all repositories
 - [ ] **Build Test**: Verify build environment with `./compile.sh kernel BOARD=bananapim5 BRANCH=current KERNEL_BTF=no`
 - [ ] **Git Commit**: "Setup development environment with repository management"
+- [ ] **BLOGPOST Update**: Document initial development setup and repository management approach
+- [ ] **Completion Date**: ___________
 
 #### Phase 1.2: Basic Board Configuration
 **Reference**: ARMBIAN_COMMUNITY_BUILD_GUIDE.md Section "Creating New Board Support"
@@ -45,6 +49,8 @@ This document outlines a phased approach to creating a community-maintained Armb
 - [ ] **Implementation**: Create `config/boards/rg34xxsp.conf` with basic H700 configuration
 - [ ] **Build Test**: `./compile.sh kernel BOARD=rg34xxsp BRANCH=current`
 - [ ] **Git Commit**: "Add basic RG34XXSP board configuration"
+- [ ] **BLOGPOST Update**: Document board configuration approach and H700 family integration
+- [ ] **Completion Date**: ___________
 
 **Board Configuration Content**:
 ```bash
@@ -68,6 +74,8 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 - [ ] **Implementation**: Create minimal device tree `arch/arm64/boot/dts/allwinner/sun50i-h700-anbernic-rg34xx-sp.dts`
 - [ ] **Build Test**: `./compile.sh dts-check BOARD=rg34xxsp BRANCH=current`
 - [ ] **Git Commit**: "Add minimal RG34XXSP device tree"
+- [ ] **BLOGPOST Update**: Document device tree creation from ROCKNIX reference
+- [ ] **Completion Date**: ___________
 
 **Minimal Device Tree Content**:
 ```dts
@@ -101,8 +109,10 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 - [ ] **Implementation**: Add basic framebuffer display support to device tree
 - [ ] **Implementation**: Configure display engine for console output
 - [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble KERNEL_BTF=no`
-- [ ] **Copy Build**: Run `./copy_build.sh 1 display-support` to copy image to builds directory
+- [ ] **Copy Build**: Run `./helper_scripts/copy_build.sh 1 display-support` to copy image to builds directory
 - [ ] **Git Commit**: "Add basic display framebuffer support and Phase 1 build"
+- [ ] **BLOGPOST Update**: Document display implementation and first build milestone
+- [ ] **Completion Date**: ___________
 
 **Basic Display Device Tree Configuration**:
 ```dts
@@ -128,13 +138,17 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 - [ ] **Implementation**: Enable USB HID keyboard drivers in kernel config
 - [ ] **Build Test**: USB keyboard detection works
 - [ ] **Git Commit**: "Add USB keyboard support"
+- [ ] **BLOGPOST Update**: Document USB implementation for input devices
+- [ ] **Completion Date**: ___________
 
 #### Phase 1.6: Initial Build and Test
 - [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble BUILD_MINIMAL=yes KERNEL_BTF=no`
-- [ ] **Copy Build**: Run `./copy_build.sh 1 complete` to copy image to builds directory
+- [ ] **Copy Build**: Run `./helper_scripts/copy_build.sh 1 complete` to copy image to builds directory
 - [ ] **User Test**: Flash image to SD card and verify boot with display + USB keyboard
 - [ ] **Update Status**: Mark Phase 1 as complete (✅) and Phase 2 as current (🔄) in README.md
 - [ ] **Git Commit**: "Complete Phase 1 - Basic boot with display and USB input"
+- [ ] **BLOGPOST Update**: Document Phase 1 completion with testing results and lessons learned
+- [ ] **Completion Date**: ___________
 
 **Phase 1 Success Criteria**:
 - System boots successfully to login prompt on display

@@ -6,6 +6,9 @@
 
 set -e
 
+# Go to project root
+cd "$(dirname "$0")/.."
+
 if [ $# -ne 2 ]; then
     echo "Usage: $0 <phase_number> <description>"
     echo "Example: $0 1 display-support"

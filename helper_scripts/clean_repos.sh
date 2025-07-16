@@ -5,6 +5,9 @@
 
 set -e
 
+# Go to project root
+cd "$(dirname "$0")/.."
+
 echo "Cleaning repository directories..."
 
 # Remove all contents from repos_reference
@@ -27,4 +30,4 @@ fi
 
 echo "Repository cleanup complete!"
 echo ""
-echo "To restore repositories, run: ./restore_repos.sh"
+echo "To restore repositories, run: ./helper_scripts/restore_repos.sh"
