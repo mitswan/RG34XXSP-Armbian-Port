@@ -133,6 +133,7 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 - [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble BUILD_MINIMAL=yes KERNEL_BTF=no`
 - [ ] **Copy Build**: Run `./copy_build.sh 1 complete` to copy image to builds directory
 - [ ] **User Test**: Flash image to SD card and verify boot with display + USB keyboard
+- [ ] **Update Status**: Mark Phase 1 as complete (✅) and Phase 2 as current (🔄) in README.md
 - [ ] **Git Commit**: "Complete Phase 1 - Basic boot with display and USB input"
 
 **Phase 1 Success Criteria**:
@@ -188,6 +189,7 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 - [ ] **Copy Build**: Run `./copy_build.sh 2 network` to copy image to builds directory
 - [ ] **User Test**: Connect to WiFi network via USB keyboard on device
 - [ ] **User Test**: SSH into device from remote computer
+- [ ] **Update Status**: Mark Phase 2 as complete (✅) and Phase 3 as current (🔄) in README.md
 - [ ] **Git Commit**: "Complete Phase 2 - Network connectivity"
 
 **Phase 2 Success Criteria**:
@@ -271,6 +273,8 @@ gpio-keys {
 - [ ] **Implementation**: Configure LED triggers
 - [ ] **Build Test**: LEDs respond to system events
 - [ ] **Git Commit**: "Add LED indicator support"
+- [ ] **Update Status**: Mark Phase 3 as complete (✅) and Phase 4 as current (🔄) in README.md
+- [ ] **Git Commit**: "Complete Phase 3 - Audio and input controls"
 
 **Phase 3 Success Criteria**:
 - Audio plays through speakers and headphones
@@ -318,6 +322,8 @@ gpio-keys {
 - [ ] **Implementation**: Configure CPU governors for balanced performance
 - [ ] **Build Test**: Performance benchmarks for general computing
 - [ ] **Git Commit**: "Add performance optimizations"
+- [ ] **Update Status**: Mark Phase 4 as complete (✅) and Phase 5 as current (🔄) in README.md
+- [ ] **Git Commit**: "Complete Phase 4 - Power management and advanced features"
 
 **Phase 4 Success Criteria**:
 - Battery level monitoring accurate
@@ -347,6 +353,8 @@ gpio-keys {
 - [ ] **Implementation**: Add power management UI elements
 - [ ] **Build Test**: User interface appropriate for handheld form factor
 - [ ] **Git Commit**: "Add hardware-specific UX optimizations"
+- [ ] **Update Status**: Mark Phase 5 as complete (✅) and project as finished in README.md
+- [ ] **Git Commit**: "Complete Phase 5 - Desktop environment and project completion"
 
 **Phase 5 Success Criteria**:
 - Desktop environment runs smoothly
