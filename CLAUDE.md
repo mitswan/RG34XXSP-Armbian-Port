@@ -172,10 +172,10 @@ This ensures all implementation decisions are informed by existing successful ap
 ### Rule 5: README.md Status Maintenance
 **MANDATORY**: Before every git commit, Claude must update README.md with:
 
-1. **Phase Indicators**: Update phase status using proper labels:
-   - **DONE** = Complete phases
-   - **CURRENT** = Current active phase  
-   - **PENDING** = Future pending phases
+1. **Phase Indicators**: Update phase status using proper emojis:
+   - ✅ = Complete phases
+   - ▶️ = Current active phase (with ✨*Current*✨ suffix)
+   - 🔜 = Future pending phases
 
 2. **Status Summary**: Replace the "Status:" field with exactly one sentence describing what the current commit accomplishes
 
