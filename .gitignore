@@ -1,0 +1,57 @@
+# Repository directories - these contain cloned repos and should not be tracked
+repos_reference/
+repos_to_update/
+
+# Build artifacts and temporary files
+*.img
+*.tar.gz
+*.tar.xz
+*.deb
+*.rpm
+artifacts/
+build/
+output/
+cache/
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS generated files
+Thumbs.db
+.directory
+
+# Log files
+*.log
+*.out
+*.err
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# ARM/embedded development files
+*.bin
+*.elf
+*.hex
+*.dtb
+*.dtbo
+
+# Armbian build specific
+userpatches/
+config/output/
+
+# Testing artifacts
+test_results/
+test_images/
+
+# Backup files
+*.bak
+*.backup
+*_backup
+*_old
