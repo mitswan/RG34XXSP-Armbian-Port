@@ -125,6 +125,7 @@ make
 ## Ongoing Tasks
 - Always keep the HARDWARE.md up to date with what is learned about the objective to compile Armbian for RG34XXSP
 - Focus on adapting existing H700 support for RG34XXSP specific hardware differences
+- **README.md Maintenance**: For every commit, update README.md with current phase indicators and exactly 1 sentence describing the commit
 
 ## Development Rules
 
@@ -167,3 +168,17 @@ This ensures all implementation decisions are informed by existing successful ap
 5. **Regeneration**: New TESTING.md created for each new phase requiring testing
 
 **Purpose**: Ensures testing documentation is current, relevant, and not cluttered with obsolete information.
+
+### Rule 5: README.md Status Maintenance
+**MANDATORY**: Before every git commit, Claude must update README.md with:
+
+1. **Phase Indicators**: Update phase status using proper symbols:
+   - ✅ = Complete phases
+   - 🔄 = Current active phase  
+   - ⏳ = Future pending phases
+
+2. **Status Summary**: Replace the "Status:" field with exactly one sentence describing what the current commit accomplishes
+
+3. **Timing**: This update must happen before the git commit, ensuring the public GitHub page always reflects current development status
+
+**Purpose**: Maintains up-to-date public visibility of project progress and current development state.

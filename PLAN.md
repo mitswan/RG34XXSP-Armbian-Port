@@ -377,7 +377,8 @@ gpio-keys {
 1. **Kernel Build Test**: `./compile.sh kernel BOARD=rg34xxsp BRANCH=current KERNEL_BTF=no`
 2. **Device Tree Check**: `./compile.sh dts-check BOARD=rg34xxsp BRANCH=current`
 3. **Full Image Build**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble KERNEL_BTF=no`
-4. **Git Commit**: Only after successful build tests
+4. **Update README**: Update phase indicators and add 1-sentence summary of commit changes
+5. **Git Commit**: Only after successful build tests and README updates
 
 ### Debugging and Rollback Strategy
 **When builds fail or regressions occur:**
