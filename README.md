@@ -8,10 +8,10 @@ This project aims to create a complete Armbian community build for the RG34XXSP 
 
 ## Development Status
 
-**Status:** Phase indicator emojis updated to use ✅ ▶️ 🔜 format with sparkle highlights for current phase visibility and improved visual clarity.
+**Status:** Changed active phase suffix from "Current" to "In Progress" for clearer indication of ongoing development work status.
 
 - ✅ **Phase 0**: Project planning and documentation
-- ▶️ **Phase 1**: Foundation, display, and basic input ✨*Current*✨
+- ▶️ **Phase 1**: Foundation, display, and basic input ✨*In Progress*✨
 - 🔜 **Phase 2**: Network connectivity and SSH access
 - 🔜 **Phase 3**: Audio and input controls
 - 🔜 **Phase 4**: Power management and advanced features
