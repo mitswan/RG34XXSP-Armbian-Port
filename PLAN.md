@@ -377,8 +377,39 @@ gpio-keys {
 1. **Kernel Build Test**: `./compile.sh kernel BOARD=rg34xxsp BRANCH=current KERNEL_BTF=no`
 2. **Device Tree Check**: `./compile.sh dts-check BOARD=rg34xxsp BRANCH=current`
 3. **Full Image Build**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble KERNEL_BTF=no`
-4. **Update README**: Update phase indicators and add 1-sentence summary of commit changes
-5. **Git Commit**: Only after successful build tests and README updates
+4. **Git Tracking**: Commit armbian-build changes to `rg34xxsp-support` branch with descriptive messages
+5. **Update README**: Update phase indicators and add 1-sentence summary of commit changes
+6. **Git Commit**: Only after successful build tests and README updates
+
+### Armbian Submission Preparation
+**Git workflow for upstream contribution:**
+1. **Branch Setup**: Use `rg34xxsp-support` branch in `repos_to_update/armbian-build/`
+2. **Atomic Commits**: Separate commits for board config, device tree, kernel patches, and BSP packages
+3. **Commit Messages**: Include hardware testing results and component descriptions
+4. **Upstream Sync**: Regular rebasing against `upstream/main` before submission
+5. **Pull Request**: Submit via GitHub when Phase 1-2 complete and tested
+
+### Recommended Commit Structure (4-8 commits total)
+**Core Infrastructure (3-4 commits):**
+1. **Board Configuration**: `config/boards/rg34xxsp.conf` - Main board definition
+2. **Device Tree**: `.dts` file for RG34XXSP hardware definition
+3. **Bootloader Config**: U-Boot defconfig if custom configuration needed
+4. **Kernel Config**: H700-specific kernel configuration changes
+
+**Hardware Support (2-3 commits):**
+5. **Display & Input Patches**: Screen panel and controller support patches
+6. **Audio & Power Patches**: Sound codec and power management patches
+7. **Connectivity Patches**: WiFi/Bluetooth driver patches if needed
+
+**Integration (1 commit):**
+8. **BSP Package**: Board-specific post-install scripts and system services
+
+**Commit Guidelines:**
+- **Logical Separation**: Each commit should be a complete, working feature
+- **Atomic Changes**: One functional area per commit (avoid mixing unrelated changes)
+- **Bisectable**: Each commit should build successfully without errors
+- **Descriptive Messages**: Include testing results and hardware validation details
+- **Anti-Patterns**: Avoid 20+ tiny commits or 1 massive commit with everything
 
 ### Debugging and Rollback Strategy
 **When builds fail or regressions occur:**
