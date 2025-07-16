@@ -387,7 +387,7 @@ gpio-keys {
 2. **Atomic Commits**: Separate commits for board config, device tree, kernel patches, and BSP packages
 3. **Commit Messages**: Include hardware testing results and component descriptions
 4. **Upstream Sync**: Regular rebasing against `upstream/main` before submission
-5. **Pull Request**: Submit via GitHub when Phase 1-2 complete and tested
+5. **Human Submission**: When ready, notify human to manually submit pull request (Claude cannot submit)
 
 ### Recommended Commit Structure (4-8 commits total)
 **Core Infrastructure (3-4 commits):**

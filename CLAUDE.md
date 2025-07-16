@@ -125,7 +125,8 @@ make
 ## Ongoing Tasks
 - Always keep the HARDWARE.md up to date with what is learned about the objective to compile Armbian for RG34XXSP
 - Focus on adapting existing H700 support for RG34XXSP specific hardware differences
-- **README.md Maintenance**: For every commit, update README.md with current phase indicators and exactly 1 sentence describing the commit
+- **README.md Maintenance**: For every commit, update README.md phase indicators; update status only for implementation progress (not style changes)
+- **Human-Only Submissions**: Never submit pull requests to Armbian team; notify human when submission is ready
 
 ## Development Rules
 
@@ -177,8 +178,19 @@ This ensures all implementation decisions are informed by existing successful ap
    - ▶️ = Current active phase (with ✨*In Progress*✨ suffix)
    - 🔜 = Future pending phases
 
-2. **Status Summary**: Replace the "Status:" field with exactly one sentence describing what the current commit accomplishes
+2. **Status Summary**: Replace the "Status:" field with exactly one sentence describing progress along the implementation plan (not minor style/documentation changes)
 
 3. **Timing**: This update must happen before the git commit, ensuring the public GitHub page always reflects current development status
 
 **Purpose**: Maintains up-to-date public visibility of project progress and current development state.
+
+### Rule 6: Human-Only Armbian Submission
+**MANDATORY**: All submissions to the Armbian team must be performed by a human, never by Claude.
+
+1. **Claude Responsibility**: Prepare all code, documentation, and branch structure for submission
+2. **Human Handoff**: When submission is ready, Claude must notify the human via console message
+3. **Notification Format**: "🚨 HUMAN ACTION REQUIRED: Armbian submission ready. Please review and submit pull request manually."
+4. **No Automation**: Claude must never attempt to create pull requests, contact maintainers, or submit code upstream
+5. **Support Role**: Claude can assist with submission preparation but cannot execute the submission
+
+**Purpose**: Ensures human oversight and responsibility for all upstream contributions to the Armbian project.
