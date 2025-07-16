@@ -371,6 +371,14 @@ gpio-keys {
 3. **Full Image Build**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble KERNEL_BTF=no`
 4. **Git Commit**: Only after successful build tests
 
+### Debugging and Rollback Strategy
+**When builds fail or regressions occur:**
+1. **Check Git History**: Use `git log --oneline` to identify last working commit
+2. **Rollback Options**: Use `git revert <commit>` or `git reset --hard <commit>` to return to working state
+3. **Incremental Changes**: Make smaller, testable changes to isolate issues
+4. **Build Comparison**: Compare failed builds with previous working builds using git diff
+5. **Repository Reset**: Use `./clean_repos.sh && ./restore_repos.sh` to reset development environment
+
 ### Build Validation Checklist
 - [ ] Clean build completes without errors
 - [ ] Device tree compiles successfully
@@ -384,8 +392,16 @@ gpio-keys {
 1. **Pre-Test**: Create TESTING.md with specific test instructions
 2. **User Execution**: User follows TESTING.md procedures
 3. **Results Collection**: User updates TESTING.md with results
-4. **Issue Resolution**: If tests fail, update PLAN.md and retest
+4. **Issue Resolution**: If tests fail, use git rollback to return to last working build before debugging
 5. **Phase Completion**: Only proceed after successful test confirmation
+
+### Git-Based Debugging Workflow
+**When hardware tests fail:**
+1. **Identify Regression**: Compare current failing build with last working build using git history
+2. **Rollback to Working State**: Use `git log --oneline` to find last working commit, then `git reset --hard <commit>`
+3. **Incremental Testing**: Make small changes and test each step to isolate the problem
+4. **Build Bisection**: Use `git bisect` to systematically find the commit that introduced the issue
+5. **Clean Environment**: Reset repository environment with `./clean_repos.sh && ./restore_repos.sh` if needed
 
 ### Hardware Testing Requirements
 - **RG34XXSP Device**: Physical hardware for testing
@@ -410,6 +426,8 @@ gpio-keys {
    - **Mitigation**: Implement thorough build-time validation
 3. **Community Acceptance**: Armbian community may have specific requirements
    - **Mitigation**: Engage with community early, follow all guidelines
+4. **Development Regressions**: Changes may break previously working functionality
+   - **Mitigation**: Use git version control extensively for rollback capability
 
 ## Success Metrics
 
