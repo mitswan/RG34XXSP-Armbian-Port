@@ -4,7 +4,7 @@
 
 This project aims to create a complete Armbian community build for the RG34XXSP device, transforming it into a full-featured ARM64 Linux computer. Unlike gaming-focused distributions, this follows Armbian's mission to provide standard desktop and server computing capabilities on ARM hardware.
 
-🛠️ **Development Branch**: All Armbian code changes are being made on the [`rg34xxsp-support` branch](https://github.com/armbian/build/compare/main...mitswan:build:rg34xxsp-support) for eventual upstream submission.
+🛠️ **Development Branch**: All Armbian code changes are being made on the [`rg34xxsp-support`](https://github.com/armbian/build/compare/main...mitswan:build:rg34xxsp-support) branch for eventual upstream submission.
 
 ⚠️ **This is NOT a gaming distribution** - This project focuses on general-purpose computing following Armbian's mission.
 
