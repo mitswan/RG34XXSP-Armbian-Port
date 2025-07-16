@@ -18,7 +18,7 @@ TIMESTAMP=$(date +%Y%m%d-%H%M)
 BUILD_NAME="phase${PHASE_NUMBER}-${TIMESTAMP}-${DESCRIPTION}"
 
 # Armbian output directory
-OUTPUT_DIR="repos_to_update/armbian-build/output/images"
+OUTPUT_DIR="repos_to_update/armbian-build-rg34xxsp-support-branch/output/images"
 
 # Check if output directory exists
 if [ ! -d "$OUTPUT_DIR" ]; then

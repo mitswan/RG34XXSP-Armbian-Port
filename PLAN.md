@@ -383,7 +383,7 @@ gpio-keys {
 
 ### Armbian Submission Preparation
 **Git workflow for upstream contribution:**
-1. **Branch Setup**: Use `rg34xxsp-support` branch in `repos_to_update/armbian-build/`
+1. **Branch Setup**: Use `rg34xxsp-support` branch in `repos_to_update/armbian-build-rg34xxsp-support-branch/`
 2. **Atomic Commits**: Separate commits for board config, device tree, kernel patches, and BSP packages
 3. **Commit Messages**: Include hardware testing results and component descriptions
 4. **Upstream Sync**: Regular rebasing against `upstream/main` before submission
