@@ -37,7 +37,9 @@ This document outlines a phased approach to creating a community-maintained Armb
 #### Phase 1.1: Development Environment Setup
 - [ ] **Repository Setup**: Run `./helper_scripts/clean_repos.sh` to clean repository directories
 - [ ] **Repository Setup**: Run `./helper_scripts/restore_repos.sh` to restore all repositories
-- [ ] **Build Test**: Verify build environment with `./compile.sh kernel BOARD=bananapim5 BRANCH=current KERNEL_BTF=no`
+- [ ] **Kernel Build Test**: Verify kernel build with `./compile.sh kernel BOARD=bananapim5 BRANCH=current KERNEL_BTF=no`
+- [ ] **Full Image Build Test**: Verify complete image build with `./compile.sh build BOARD=bananapim5 BRANCH=current RELEASE=noble BUILD_MINIMAL=yes KERNEL_BTF=no`
+- [ ] **Build Validation**: Confirm successful image creation in output/images/ directory
 - [ ] **Git Commit**: "Setup development environment with repository management"
 - [ ] **BLOGPOST Update**: Document initial development setup and repository management approach
 - [ ] **Completion Date**: ___________
