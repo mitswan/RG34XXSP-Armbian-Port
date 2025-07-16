@@ -2,7 +2,7 @@
 repos_reference/
 repos_to_update/
 
-# Build artifacts and temporary files
+# Build artifacts and temporary files (except builds/ directory)
 *.img
 *.tar.gz
 *.tar.xz
@@ -12,6 +12,11 @@ artifacts/
 build/
 output/
 cache/
+
+# Track builds directory for Etcher-ready images
+!builds/
+!builds/*.img.xz
+!builds/*.md
 
 # Editor and IDE files
 .vscode/

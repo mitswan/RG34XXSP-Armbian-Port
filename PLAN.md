@@ -33,9 +33,10 @@ This document outlines a phased approach to creating a community-maintained Armb
 **Testing**: System boots, display shows console, USB keyboard works, basic Linux functionality
 
 #### Phase 1.1: Development Environment Setup
-- [ ] **Build Test**: Clone armbian-build to `repos_to_update/armbian-build/`
-- [ ] **Build Test**: Verify build environment with `./compile.sh kernel BOARD=bananapim5 BRANCH=current`
-- [ ] **Git Commit**: "Initial armbian-build repository clone"
+- [ ] **Repository Setup**: Run `./clean_repos.sh` to clean repository directories
+- [ ] **Repository Setup**: Run `./restore_repos.sh` to restore all repositories
+- [ ] **Build Test**: Verify build environment with `./compile.sh kernel BOARD=bananapim5 BRANCH=current KERNEL_BTF=no`
+- [ ] **Git Commit**: "Setup development environment with repository management"
 
 #### Phase 1.2: Basic Board Configuration
 **Reference**: ARMBIAN_COMMUNITY_BUILD_GUIDE.md Section "Creating New Board Support"
@@ -99,8 +100,9 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 
 - [ ] **Implementation**: Add basic framebuffer display support to device tree
 - [ ] **Implementation**: Configure display engine for console output
-- [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble`
-- [ ] **Git Commit**: "Add basic display framebuffer support"
+- [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble KERNEL_BTF=no`
+- [ ] **Copy Build**: Run `./copy_build.sh 1 display-support` to copy image to builds directory
+- [ ] **Git Commit**: "Add basic display framebuffer support and Phase 1 build"
 
 **Basic Display Device Tree Configuration**:
 ```dts
@@ -128,7 +130,8 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 - [ ] **Git Commit**: "Add USB keyboard support"
 
 #### Phase 1.6: Initial Build and Test
-- [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble BUILD_MINIMAL=yes`
+- [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble BUILD_MINIMAL=yes KERNEL_BTF=no`
+- [ ] **Copy Build**: Run `./copy_build.sh 1 complete` to copy image to builds directory
 - [ ] **User Test**: Flash image to SD card and verify boot with display + USB keyboard
 - [ ] **Git Commit**: "Complete Phase 1 - Basic boot with display and USB input"
 
@@ -181,7 +184,8 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 - [ ] **Git Commit**: "Add network management and SSH"
 
 #### Phase 2.3: Remote Access Testing
-- [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble`
+- [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble KERNEL_BTF=no`
+- [ ] **Copy Build**: Run `./copy_build.sh 2 network` to copy image to builds directory
 - [ ] **User Test**: Connect to WiFi network via USB keyboard on device
 - [ ] **User Test**: SSH into device from remote computer
 - [ ] **Git Commit**: "Complete Phase 2 - Network connectivity"
@@ -354,11 +358,17 @@ gpio-keys {
 
 ## Build Testing Strategy
 
+### Repository Management Protocol
+**Before any development work:**
+1. **Clean Environment**: Run `./clean_repos.sh` to ensure clean state
+2. **Restore Repositories**: Run `./restore_repos.sh` to restore all needed repositories
+3. **Verify Setup**: Confirm all repositories are present and accessible
+
 ### Continuous Integration Testing
 **After each major change:**
-1. **Kernel Build Test**: `./compile.sh kernel BOARD=rg34xxsp BRANCH=current`
+1. **Kernel Build Test**: `./compile.sh kernel BOARD=rg34xxsp BRANCH=current KERNEL_BTF=no`
 2. **Device Tree Check**: `./compile.sh dts-check BOARD=rg34xxsp BRANCH=current`
-3. **Full Image Build**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble`
+3. **Full Image Build**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble KERNEL_BTF=no`
 4. **Git Commit**: Only after successful build tests
 
 ### Build Validation Checklist
@@ -417,9 +427,12 @@ gpio-keys {
 
 ## Next Steps
 
-1. **Phase 1 Start**: Begin with development environment setup
-2. **Community Engagement**: Engage with Armbian community for guidance
-3. **Hardware Acquisition**: Ensure RG34XXSP hardware availability
-4. **Testing Setup**: Prepare testing environment and procedures
+1. **Repository Setup**: Run `./clean_repos.sh` then `./restore_repos.sh` to prepare development environment
+2. **Phase 1 Start**: Begin with development environment setup following repository management protocol
+3. **Community Engagement**: Engage with Armbian community for guidance
+4. **Hardware Acquisition**: Ensure RG34XXSP hardware availability
+5. **Testing Setup**: Prepare testing environment and procedures
+
+**Important**: Always use the repository management scripts (`clean_repos.sh` and `restore_repos.sh`) when working with the reference and development repositories. This ensures a consistent, clean development environment and prevents conflicts with the main project git repository.
 
 This plan provides a structured, testable approach to creating RG34XXSP Armbian support while following community standards and leveraging existing H700 implementations. Each phase builds upon the previous one, ensuring stable progress toward full hardware support.
