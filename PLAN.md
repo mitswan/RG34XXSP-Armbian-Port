@@ -75,30 +75,37 @@ This document outlines a phased approach to creating a community-maintained Armb
 - [x] **BLOGPOST Update**: Document initial development setup and repository management approach
 - [x] **Completion Date**: July 16, 2025
 
-#### Phase 1.2: Basic Board Configuration
-**Reference**: ARMBIAN_COMMUNITY_BUILD_GUIDE.md Section "Creating New Board Support"
-**Reference**: HARDWARE.md Section "H700 SoC specifications"
+#### Phase 1.2: Compiled U-Boot Board Configuration  
+**Reference**: ALTERNATIVE_IMPLEMENTATIONS.md Section "ROCKNIX Compiled U-Boot Approach"
+**Reference**: HARDWARE.md Section "H700 SoC specifications and ATF platform"
 
-- [ ] **Implementation**: Create `config/boards/rg34xxsp.conf` with basic H700 configuration
-- [ ] **Build Test**: `./compile.sh kernel BOARD=rg34xxsp BRANCH=current`
-- [ ] **Git Commit**: "Add basic RG34XXSP board configuration"
-- [ ] **BLOGPOST Update**: Document board configuration approach and H700 family integration
+- [ ] **Implementation**: Create `config/boards/rg34xxsp.csc` with compiled U-Boot configuration following ROCKNIX approach
+- [ ] **Implementation**: Create `rg34xxsp_defconfig` based on `orangepi_zero2_defconfig` and ROCKNIX's `anbernic_rg35xx_h700_defconfig`
+- [ ] **Build Test**: `./compile.sh kernel BOARD=rg34xxsp BRANCH=current`  
+- [ ] **Git Commit**: "Add RG34XXSP board configuration with compiled U-Boot"
+- [ ] **BLOGPOST Update**: Document compiled U-Boot approach and H700 ATF platform usage
 - [ ] **Completion Date**: ___________
 
 **Board Configuration Content**:
 ```bash
-# Based on sun50iw9 family (H700 SoC)
-BOARD_NAME="RG34XXSP"
-BOARDFAMILY="sun50iw9"
-BOOTCONFIG="sun50i_h700_defconfig"
-ARCH="arm64"
-KERNEL_TARGET="current,edge"
-LINUXFAMILY="sunxi64"
-CPUMIN="408000"
-CPUMAX="1512000"
-SERIALCON="ttyS0"
-BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
+# Anbernic RG34XXSP Gaming Handheld - Community Board
+declare -g BOARD_NAME="Anbernic RG34XXSP"
+declare -g BOARD_MAINTAINER=""
+declare -g BOARDFAMILY="sun50iw9"
+declare -g KERNEL_TARGET="current,edge"
+declare -g KERNEL_TEST_TARGET="current"
+declare -g OVERLAY_PREFIX="sun50i-h700"
+declare -g BOOT_FDT_FILE="sun50i-h700-anbernic-rg34xx-sp.dtb"
+declare -g BOOTCONFIG="rg34xxsp_defconfig"  # Custom defconfig based on ROCKNIX
+declare -g FORCE_BOOTSCRIPT_UPDATE="yes"
+declare -g PACKAGE_LIST_BOARD="rfkill bluetooth bluez bluez-tools gamemode"
 ```
+
+**U-Boot Defconfig Requirements**:
+- Base: `orangepi_zero2_defconfig` (H616 derivative)  
+- ATF Platform: `sun50i_h616` (H700 uses H616 ATF)
+- Device Tree: `sun50i-h700-anbernic-rg34xx-sp`
+- DRAM: DDR3-1333 configuration for gaming handheld
 
 #### Phase 1.3: Basic Device Tree
 **Reference**: ALTERNATIVE_IMPLEMENTATIONS.md Section "ROCKNIX device tree files"
@@ -192,17 +199,69 @@ BOOT_FDT_FILE="allwinner/sun50i-h700-anbernic-rg34xx-sp.dtb"
 
 ---
 
-### Phase 2: Network Connectivity and Remote Access
-**Goal**: Enable WiFi connectivity and SSH remote access
-**Testing**: WiFi connects to network, SSH accessible, remote administration works
+### Phase 2: Bootloader Implementation and Basic Boot  
+**Goal**: Fix bootloader compilation issues and achieve basic system boot with compiled U-Boot
+**Testing**: System powers on, shows boot activity (LEDs), serial console output, basic boot process
 
-#### Phase 2.1: WiFi Driver Implementation
+#### Phase 2.1: U-Boot Defconfig Creation
+**Reference**: ALTERNATIVE_IMPLEMENTATIONS.md Section "ROCKNIX U-Boot configuration" 
+**Reference**: HARDWARE.md Section "H700 ATF platform compatibility"
+
+- [ ] **Implementation**: Create `config/u-boot/rg34xxsp_defconfig` based on `orangepi_zero2_defconfig`
+- [ ] **Implementation**: Adapt ROCKNIX's `anbernic_rg35xx_h700_defconfig` settings for RG34XXSP
+- [ ] **Implementation**: Configure DDR3-1333 settings and H700-specific parameters
+- [ ] **Build Test**: `./compile.sh u-boot BOARD=rg34xxsp BRANCH=current`
+- [ ] **Git Commit**: "Add RG34XXSP U-Boot defconfig based on ROCKNIX approach"
+- [ ] **Completion Date**: ___________
+
+**Key U-Boot Configuration Elements**:
+```bash
+CONFIG_DEFAULT_DEVICE_TREE="sun50i-h700-anbernic-rg34xx-sp"
+CONFIG_DRAM_SUN50I_H616_DDR3_1333=y  # Gaming handheld DRAM config
+CONFIG_BOOTDELAY=0                    # Fast boot for gaming device  
+CONFIG_LED_STATUS=y                   # Status LED support
+CONFIG_LED_STATUS_GPIO=y              # GPIO-based LED control
+CONFIG_USB_EHCI_HCD=y                 # USB host support
+CONFIG_USB_OHCI_HCD=y
+```
+
+#### Phase 2.2: Bootloader Integration Testing
+**Reference**: ALTERNATIVE_IMPLEMENTATIONS.md Section "Standard Allwinner bootloader layout"
+
+- [ ] **Implementation**: Update board configuration to remove prebuilt bootloader BSP function
+- [ ] **Implementation**: Set `BOOTCONFIG="rg34xxsp_defconfig"` in board config  
+- [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble KERNEL_BTF=no`
+- [ ] **Copy Build**: Run updated `./helper_scripts/copy_build.sh 2 compiled-uboot` 
+- [ ] **User Test**: Flash and test for basic boot activity (power LED, serial output)
+- [ ] **Git Commit**: "Switch to compiled U-Boot approach following ROCKNIX"
+- [ ] **Completion Date**: ___________
+
+**Phase 2 Success Criteria**:
+- System shows boot activity (power LED activation during boot process)
+- Serial console output visible during boot sequence  
+- U-Boot loads and attempts to boot kernel
+- Boot process progresses beyond complete system unresponsiveness
+- Foundation established for Phase 3 display and networking implementation
+
+---
+
+### Phase 3: Display and Network Connectivity
+**Goal**: Enable display output and WiFi connectivity with compiled U-Boot foundation
+**Testing**: Display shows boot messages, WiFi connects to network, SSH accessible
+
+#### Phase 3.1: Display Implementation
+**Reference**: ALTERNATIVE_IMPLEMENTATIONS.md Section "ROCKNIX display patches"
+**Reference**: HARDWARE.md Section "Display System specifications"
+
+- [ ] **Implementation**: Add display engine and framebuffer support to device tree
+- [ ] **Implementation**: Configure console output to display
+- [ ] **Build Test**: Boot with display output visible
+- [ ] **Git Commit**: "Add display support with compiled U-Boot"  
+- [ ] **Completion Date**: ___________
+
+#### Phase 3.2: WiFi Driver Implementation  
 **Reference**: ALTERNATIVE_IMPLEMENTATIONS.md Section "RTL8821CS driver support"
 **Reference**: HARDWARE.md Section "WiFi RTL8821CS specifications"
-
-- [ ] **Implementation**: Add RTL8821CS WiFi support to kernel config
-- [ ] **Implementation**: Add WiFi device tree configuration
-- [ ] **Build Test**: `./compile.sh build BOARD=rg34xxsp BRANCH=current RELEASE=noble`
 - [ ] **Git Commit**: "Add WiFi RTL8821CS support"
 
 **WiFi Device Tree Configuration**:

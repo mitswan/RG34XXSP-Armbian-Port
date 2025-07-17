@@ -25,12 +25,13 @@ make
 # Output: artifacts/alpine-h700.img
 ```
 
-**Key Components Extracted**:
-- SPL (Secondary Program Loader)
-- U-Boot bootloader
-- Linux kernel (from stock firmware)
-- Kernel modules
-- Firmware blobs (GPU, WiFi, etc.)
+**Bootloader Extraction Process**:
+- **SPL Extraction**: Searches for `eGON.BT0` signature at offsets 8KB, 128KB, 256KB
+- **U-Boot Extraction**: Searches for `sunxi-package` signature around 16400KB
+- **Method**: Python script with signature-based detection
+- **Output**: Raw binary files for direct SD card positioning
+- **SD Card Layout**: SPL at 8KB offset, U-Boot at extracted position
+- **Success Rate**: Works reliably but depends on stock firmware availability
 
 **Build Dependencies**:
 - podman (for Alpine container environment)
@@ -119,10 +120,18 @@ make
 
 ### 4. ROCKNIX Distribution (`repos_reference/rocknix-distribution/`)
 
-**Approach**: Gaming distribution with extensive H700 device support.
+**Approach**: Gaming distribution with extensive H700 device support and compiled U-Boot.
+
+**Bootloader Strategy**: Compiled U-Boot with custom configuration
+- **U-Boot Version**: v2025.07-rc3 (latest)
+- **U-Boot Config**: `anbernic_rg35xx_h700_defconfig`
+- **ATF Platform**: `sun50i_h616` (H700 uses H616 ARM Trusted Firmware)
+- **Build Output**: `u-boot-sunxi-with-spl.bin`
+- **SD Card Layout**: Standard Allwinner 8KB offset positioning
+- **Success Rate**: Proven to work reliably on multiple H700 devices
 
 **Key Features**:
-- **Target Hardware**: Wide range of handheld gaming devices
+- **Target Hardware**: Wide range of handheld gaming devices including RG34XXSP
 - **Build Method**: Custom build system with device-specific patches
 - **Base System**: Gaming-focused Linux with comprehensive emulation
 - **Specialization**: Extensive H700 hardware support
@@ -266,23 +275,52 @@ make <device-config>
 - Device tree compiler needed
 - U-Boot tools for bootloader
 
+## Bootloader Implementation Comparison
+
+### **Compiled U-Boot (ROCKNIX) - RECOMMENDED**
+**Pros**:
+- Latest U-Boot features and security updates
+- Full control over bootloader configuration  
+- Standard Armbian approach
+- Proven success on multiple H700 devices
+
+**Cons**:
+- More complex build process
+- Requires proper ATF configuration
+- May need device-specific patches
+
+**Implementation**: Use `orangepi_zero2_defconfig` as base, create `rg34xxsp_defconfig` based on ROCKNIX's configuration
+
+### **Prebuilt Extraction (Alpine H700) - FALLBACK**
+**Pros**:
+- Guaranteed hardware compatibility
+- No compilation complexity
+- Preserves manufacturer optimizations
+
+**Cons**:
+- Dependent on stock firmware availability
+- No security updates
+- Cannot customize bootloader behavior
+- Legal/redistribution concerns
+
 ## Recommendations for Armbian RG34XXSP Support
 
-### 1. Leverage Existing Work
-- Use ROCKNIX device tree files as starting point
-- Adapt Knulli kernel configuration
-- Reference Alpine H700 for component extraction
+### 1. **Primary Strategy: Follow ROCKNIX Compiled U-Boot Approach**
+- **U-Boot Config**: Create `rg34xxsp_defconfig` based on `anbernic_rg35xx_h700_defconfig`
+- **ATF Platform**: Use `sun50i_h616` (proven to work with H700)
+- **Base Config**: Start with `orangepi_zero2_defconfig` (H616 derivative)
+- **Device Tree**: Use ROCKNIX's `sun50i-h700-anbernic-rg34xx-sp.dts`
 
 ### 2. Armbian Integration Strategy
-- Create board config file for RG34XXSP
-- Add device tree files to Armbian tree
-- Create kernel config based on Knulli's approach
-- Add hardware-specific patches from ROCKNIX
+- **Board Config**: Set `BOOTCONFIG="rg34xxsp_defconfig"`
+- **Family**: Use existing `sun50iw9.conf` (H616/H700 family)
+- **ATF**: Set `ATF_PLAT="sun50i_h616"`
+- **Standard Layout**: Use Armbian's standard bootloader positioning
 
 ### 3. Phased Implementation
-- **Phase 1**: Basic boot with display
-- **Phase 2**: Add WiFi and SSH
-- **Phase 3**: Add audio and controls
+- **Phase 1**: Basic boot with compiled U-Boot
+- **Phase 2**: Add display and serial console
+- **Phase 3**: Add WiFi and SSH
 - **Phase 4**: Optimize for gaming use
 
 ### 4. Testing Strategy

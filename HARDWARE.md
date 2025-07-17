@@ -11,8 +11,10 @@ The ANBERNIC RG34XXSP is a GBA SP-inspired clamshell handheld gaming device feat
 - **Architecture**: ARM Cortex-A53 quad-core @ 1.5GHz
 - **Process**: 28nm
 - **GPU**: Mali-G31 MP2 dual-core @ 850MHz
-- **Memory**: 2GB LPDDR4 RAM
+- **Memory**: 2GB LPDDR4 RAM  
 - **Storage**: 64GB eMMC (expandable via microSD to 512GB)
+- **ATF Platform**: Uses `sun50i_h616` ARM Trusted Firmware (H700 is H616 derivative)
+- **Bootloader**: Compatible with H616 U-Boot configurations
 
 ### Display System
 - **Screen**: 3.4-inch full-fit IPS LCD
@@ -78,9 +80,11 @@ The ANBERNIC RG34XXSP is a GBA SP-inspired clamshell handheld gaming device feat
 - **GPIO Control**: Power button, LED indicators
 
 #### LED Indicators
-- **Power LED**: PI12 (Power status)
-- **Status LED**: PI11 (Activity/charging status)
-- **Colors**: Red/Green/Blue multicolor support
+- **Power LED**: GPIO PI11 (software-controlled, no hardware power rail connection)
+- **Status LED**: GPIO PI7 (RGB LED for status indication)
+- **Control**: Requires GPIO LED drivers and device tree configuration
+- **Boot Behavior**: No LED activity until GPIO drivers initialize (normal)
+- **Colors**: Red/Green/Blue multicolor support via GPIO control
 
 ### Storage and Expansion
 
