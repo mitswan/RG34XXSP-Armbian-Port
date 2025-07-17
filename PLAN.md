@@ -54,7 +54,15 @@ This document outlines a phased approach to creating a community-maintained Armb
     - [ ] **I2C Buses**: I2C controllers, device addresses, clock speeds, power management integration
     - [ ] **SPI Buses**: SPI controllers, chip selects, display/storage/sensor connections
     - [ ] **USB Interfaces**: USB-OTG, USB-Host, PHY configurations, power delivery
-    - [ ] **UART/Serial**: Console UART, Bluetooth UART, debug interfaces, pinmux configurations
+    - [ ] **UART/Serial Ports**: Complete serial interface documentation and user access methods:
+      - [ ] **Console UART**: Primary serial console (ttyS0), baud rate, flow control
+      - [ ] **Bluetooth UART**: Bluetooth controller interface, RTS/CTS configuration
+      - [ ] **Debug Interfaces**: Additional UART ports for debugging, availability, pinouts
+      - [ ] **Physical Access**: GPIO pin locations, test pads, connector requirements
+      - [ ] **User Access Methods**: Software access (minicom, screen, PuTTY), hardware setup
+      - [ ] **Pinmux Configuration**: UART pin multiplexing, conflicts with other functions
+      - [ ] **Serial Console Setup**: Kernel console configuration, systemd integration
+      - [ ] **Hardware Requirements**: UART-to-USB adapters, voltage levels (3.3V), cable types
     - [ ] **ADC Channels**: Analog-to-digital converters for joysticks, battery monitoring, sensors
     - [ ] **PWM Controllers**: Backlight control, fan control, LED brightness, audio amplifiers
     - [ ] **Clock Management**: Clock trees, PLLs, clock domains, power gating
