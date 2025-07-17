@@ -13,10 +13,8 @@ build/
 output/
 cache/
 
-# Track builds directory for Etcher-ready images
-!builds/
-!builds/*.img.xz
-!builds/*.md
+# Exclude builds directory to avoid large file issues
+builds/
 
 # Editor and IDE files
 .vscode/

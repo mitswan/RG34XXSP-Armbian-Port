@@ -194,3 +194,74 @@ This ensures all implementation decisions are informed by existing successful ap
 5. **Support Role**: Claude can assist with submission preparation but cannot execute the submission
 
 **Purpose**: Ensures human oversight and responsibility for all upstream contributions to the Armbian project.
+
+### Rule 7: Shell Command Error Learning
+**MANDATORY**: When making shell command errors that could be prevented by better understanding or documentation, Claude must consider adding preventive guidance to CLAUDE.md.
+
+1. **Error Analysis**: After encountering unexpected shell command failures, analyze if the error could have been prevented with better project-specific knowledge
+2. **Pattern Recognition**: Identify if the error represents a class of mistakes likely to recur in this project context
+3. **Documentation Update**: If the error reflects missing project knowledge or common pitfalls, add a preventive rule or reminder to this CLAUDE.md file
+4. **Learning Integration**: Ensure future work benefits from lessons learned through systematic documentation
+
+**Purpose**: Creates a self-improving documentation system that reduces repeat errors and builds project-specific shell command expertise.
+
+### Rule 8: Host System Modification Approval
+**MANDATORY**: Claude must always check with the user before making any changes to the host system configuration.
+
+1. **Identification**: When encountering build issues that require host system changes (package installation, service configuration, system settings)
+2. **User Consultation**: Present the issue and proposed solution to the user for approval before proceeding
+3. **Alternatives**: Always provide both host system changes and containerized alternatives when possible
+4. **Documentation**: Update PLAN.md with the user-approved solution for future reference
+
+**Purpose**: Ensures user maintains control over their development environment and system configuration.
+
+### Rule 9: Compression Validation and Timeout
+**MANDATORY**: Claude must always validate compressed files before recommending them for testing.
+
+1. **Compression Timeout**: Allow up to 10 minutes for compression/decompression operations
+2. **Integrity Testing**: Always test compressed files using appropriate tools (e.g., `gzip -t`, `xz -t`, `7z t`) before marking them ready for testing
+3. **Decompression Testing**: Always perform a full decompression test to verify the compressed file can be properly extracted
+4. **Corruption Prevention**: If compression is interrupted or fails, remove corrupted files and retry with appropriate timeouts
+5. **File Format**: Use gzip compression for broad compatibility with image flashing tools (Balena Etcher, Raspberry Pi Imager)
+6. **Documentation**: Update TESTING.md with correct file names and formats after validation
+
+**Purpose**: Prevents user frustration from corrupt compressed files and ensures reliable testing procedures.
+
+### Rule 10: Local Build Storage with ALPHA Marking
+**MANDATORY**: Claude must store builds locally in builds/ directory and mark all builds as ALPHA.
+
+1. **Local Storage**: Store build files in builds/ directory (gitignored to avoid repository bloat)
+2. **ALPHA Marking**: All builds must be clearly marked as ALPHA in filename and documentation
+3. **File Format**: Use gzip compression for compatibility with image flashing tools
+4. **Build Validation**: Test compression integrity before saving builds
+5. **No Removal**: Never remove existing builds from builds/ directory - preserve all versions
+6. **TESTING.md Updates**: Update TESTING.md with local file paths for testing
+7. **Documentation**: Clearly mark builds as ALPHA quality in all documentation
+
+**Purpose**: Provides local build storage while avoiding repository size issues and preserving build history.
+
+### Rule 11: Local Build Testing Requirements
+**MANDATORY**: Claude must clearly mark all builds as ALPHA quality for local testing.
+
+1. **ALPHA Labeling**: All build files must include "ALPHA" in the filename
+2. **Local Testing**: All testing uses local builds/ directory files
+3. **Documentation**: TESTING.md must clearly state builds are ALPHA quality and local-only
+4. **Validation Sequence**: Must complete compression integrity test before recommending testing
+5. **Build Preservation**: Never remove or overwrite existing builds - maintain version history
+6. **Warning Labels**: All documentation must warn that builds are experimental/alpha quality
+7. **External Distribution**: For sharing builds, use external hosting or manual transfer
+
+**Purpose**: Ensures proper expectations about build stability while enabling local testing and build preservation.
+
+### Rule 12: Strict Armbian Community Standards Compliance
+**MANDATORY**: Claude must strictly follow Armbian's community board standards for all implementation decisions.
+
+1. **Board Configuration**: Use `.csc` extension and modern `declare -g` syntax for community boards
+2. **Naming Conventions**: Follow exact Armbian patterns for files, variables, and configurations
+3. **Hardware Mapping**: Use correct board families, overlay prefixes, and device tree references
+4. **Package Lists**: Include appropriate packages following established device category patterns
+5. **BSP Structure**: Implement Board Support Package functions matching Armbian conventions
+6. **Documentation**: Follow Armbian's community contribution guidelines and formatting
+7. **Upstream Readiness**: Ensure all code changes are ready for Armbian upstream submission
+
+**Purpose**: Maintains compatibility with Armbian ecosystem and ensures successful upstream integration.
