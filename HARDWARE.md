@@ -20,9 +20,20 @@ The ANBERNIC RG34XXSP is a GBA SP-inspired clamshell handheld gaming device feat
 - **Screen**: 3.4-inch full-fit IPS LCD
 - **Resolution**: 720×480 pixels (3:2 aspect ratio)
 - **Touch**: No touchscreen support
-- **Backlight**: PWM-controlled LED backlight
 - **Panel Type**: MIPI-DPI-SPI compatible
 - **Color Depth**: 24-bit RGB888
+- **Display Engine**: Allwinner Display Engine 3.3 (DE33)
+- **Driver Requirements**: 
+  - Display Engine (DE) driver for pipeline management
+  - DRM/KMS driver for modern graphics stack
+  - Framebuffer driver for console output
+  - Panel driver for timing and power control
+- **Backlight Control**:
+  - **Method**: PWM-controlled LED backlight
+  - **PWM Channel**: Dedicated PWM channel for brightness control
+  - **GPIO Enable**: GPIO pin for backlight power control
+  - **Brightness Levels**: 8-bit resolution (0-255)
+- **Console Output**: Framebuffer console for boot messages and terminal access
 
 ### Audio System
 - **Codec**: Built-in sun8i-codec (Allwinner internal)
@@ -42,10 +53,24 @@ The ANBERNIC RG34XXSP is a GBA SP-inspired clamshell handheld gaming device feat
 - **Volume Controls**: PE1 (Up), PE2 (Down)
 
 #### Analog Controls
-- **Left Stick**: ADC-based analog joystick
-- **Right Stick**: ADC-based analog joystick
+- **Left Stick**: ADC-based analog joystick (GPIO/ADC channels)
+- **Right Stick**: ADC-based analog joystick (GPIO/ADC channels)
 - **Stick Configuration**: Sunken dual joystick design
 - **Calibration**: Hardware-based dead zone compensation
+- **Resolution**: 12-bit ADC precision
+- **Driver**: Custom joypad driver or standard Linux input subsystem
+
+#### Power and Reset Controls
+- **Power Button**: GPIO-based, software-controlled power management
+- **Reset Functionality**: Accessible via button combination or hardware reset
+- **Lid Switch**: Magnetic lid sensor for sleep/wake functionality
+- **GPIO Mapping**: 
+  - Power button: GPIO pin for power management
+  - Lid sensor: GPIO interrupt for open/close detection
+- **Behavior**: 
+  - Short press: Sleep/wake
+  - Long press: Power off
+  - Lid close: Automatic sleep (configurable)
 
 ### Wireless Connectivity
 
@@ -87,6 +112,15 @@ The ANBERNIC RG34XXSP is a GBA SP-inspired clamshell handheld gaming device feat
 - **Colors**: Red/Green/Blue multicolor support via GPIO control
 
 ### Storage and Expansion
+
+#### SD Card Slots and Boot Configuration
+- **TF1 Slot**: Primary microSD slot, bootable, supports up to 512GB
+- **TF2 Slot**: Secondary microSD slot, storage only, not bootable
+- **Boot Priority**: TF1 → Internal eMMC → USB (if enabled)
+- **Supported Formats**: FAT32, ext4, NTFS (read-only)
+- **Boot Sector**: Standard Allwinner layout (SPL at 8KB, U-Boot at ~40KB)
+- **Partitioning**: GPT preferred for >2TB support, MBR compatible
+- **Card Requirements**: Class 10 minimum, UHS-I recommended for performance
 
 #### Internal Storage
 - **Primary**: 64GB eMMC 5.1

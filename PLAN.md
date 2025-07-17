@@ -32,18 +32,38 @@ This document outlines a phased approach to creating a community-maintained Armb
 
 **Project Start Date**: July 15, 2025
 
-### Phase 0: Project Planning and Documentation
+### Phase 0: Project Planning and Documentation *(INCOMPLETE - Hardware Research Required)*
 **Goal**: Complete project planning, documentation, and repository setup
 **Testing**: All documentation complete, helper scripts functional, repositories organized
+**Status**: Partial completion - basic planning done but comprehensive hardware research incomplete
 
-#### Phase 0.1: Define the Project and Research
+#### Phase 0.1: Define the Project and Research *(INCOMPLETE - Requires Comprehensive Update)*
 - [x] **Confirm Target**: Confirm with the user what we are building Armbian for in this case the Anbernic RG34XXSP.
-- [x] **Hardware Research**: Perform detailed websearching to understand the hardware platform and create HARDWARE.md with H700 SoC specifications and RG34XXSP details
-- [x] **Search for Similar Projects**: Perform detailed websearching to determine what Linux distributions are avaliable for this platform.
+- [ ] **Comprehensive Hardware Research**: Research all hardware and boot components critical for stable build creation:
+  - [ ] **Bootloaders**: SPL, U-Boot, ATF platform, compilation vs extraction approaches  
+  - [ ] **Storage**: SD card formatting, partitioning schemes, bootable slot identification (TF1/TF2)
+  - [ ] **Core Hardware**: CPU (H700), RAM (LPDDR4), GPU (Mali-G31), power management (AXP717)
+  - [ ] **Display System**: Panel specs, display drivers, backlight control, console output
+  - [ ] **Input Hardware**: Hardware buttons, power/reset buttons, analog sticks, D-pad mapping
+  - [ ] **Status Indicators**: LED configurations (power/status), GPIO control requirements
+  - [ ] **Audio System**: Codec (sun8i), amplifier, headphone detection, ALSA configuration  
+  - [ ] **Connectivity**: WiFi (RTL8821CS), Bluetooth, HDMI output, USB-OTG functionality
+  - [ ] **Special Features**: Lid open/close detection, battery management, charging status
+- [x] **Search for Similar Projects**: Perform detailed websearching to determine what Linux distributions are available for this platform.
 - [x] **Copy Reference Repositories**: Update the helper script to pull in the related repositories for other linux projects for this device.
-- [x] **Understand Other Implementations**: Pull in these repos and understand how they compiled linux for this device. Update ALTERNATIVE_IMPLEMENTATIONS.md and HARDWARE.md with what you learn.
+- [ ] **Alternative Implementation Analysis**: Research how each distribution handles hardware components:
+  - [ ] **ROCKNIX**: Device tree configurations, driver implementations, hardware support level
+  - [ ] **Knulli**: Build configurations, hardware abstraction, gaming optimizations
+  - [ ] **Alpine H700**: Minimal hardware support, extraction vs compilation approaches
+  - [ ] **MuOS**: Hardware configuration patterns, device-specific implementations
+- [ ] **Armbian Standards Research**: Document how Armbian expects hardware components configured:
+  - [ ] **Board Configuration**: Community board standards (.csc), naming conventions
+  - [ ] **Device Tree**: Armbian device tree patterns, GPIO mappings, hardware abstractions
+  - [ ] **Kernel Configuration**: Driver selection, hardware support, performance optimization
+  - [ ] **BSP Packages**: Board Support Package structure, hardware-specific scripts
 - [x] **Community Guidelines**: Research how the Armbian team wants you to submit new builds and capture in ARMBIAN_COMMUNITY_BUILD_GUIDE.md with submission requirements
-- [x] **Completion Date**: July 15, 2025
+- [ ] **Documentation Updates**: Update HARDWARE.md and ALTERNATIVE_IMPLEMENTATIONS.md throughout research process
+- [ ] **Completion Date**: *(To be completed with comprehensive hardware research)*
 
 #### Phase 0.2: Research and Planning
 - [x] **Confirm Phasing**: Determine phases based on the most minimal testable phase first, then add in more functionality support. 
@@ -53,12 +73,16 @@ This document outlines a phased approach to creating a community-maintained Armb
 - [x] **BLOGPOST Update**: Document planning methodology and AI collaboration approach
 - [x] **Completion Date**: July 16, 2025
 
-**Phase 0 Success Criteria**:
-- Detailed research has been completed into the hardware and how others have compiled linux for this device
-- All planning documentation complete and committed
-- Repository structure organized and helper scripts functional
-- Clear phase-by-phase implementation plan established
-- Development environment ready for Phase 1 implementation
+**Phase 0 Success Criteria** *(Currently Incomplete)*:
+- [ ] Comprehensive hardware research completed for all critical components
+- [ ] Detailed analysis of how alternative distributions handle each hardware component  
+- [ ] Complete documentation of Armbian standards for each hardware subsystem
+- [x] All planning documentation complete and committed
+- [x] Repository structure organized and helper scripts functional
+- [x] Clear phase-by-phase implementation plan established
+- [x] Development environment ready for Phase 1 implementation
+
+**Phase 0 Retrospective Note**: Initial planning was too superficial. The bootloader failures in Phase 2 testing revealed that comprehensive hardware research should have been completed before implementation. This phase is being reopened to complete the detailed hardware analysis that would have prevented implementation issues.
 
 ---
 
