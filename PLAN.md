@@ -49,6 +49,14 @@ This document outlines a phased approach to creating a community-maintained Armb
   - [ ] **Audio System**: Codec (sun8i), amplifier, headphone detection, ALSA configuration  
   - [ ] **Connectivity**: WiFi (RTL8821CS), Bluetooth, HDMI output, USB-OTG functionality
   - [ ] **Special Features**: Lid open/close detection, battery management, charging status
+  - [ ] **Internal Sensors and Monitoring**: Complete sensor subsystem research:
+    - [ ] **Temperature Sensors**: CPU/SoC thermal monitoring, battery temperature, ambient temperature
+    - [ ] **Ambient Light Sensor**: Automatic brightness control, light detection capabilities
+    - [ ] **Accelerometer/Gyroscope**: Motion detection, orientation sensing, gaming controls
+    - [ ] **Magnetic Sensors**: Lid open/close detection mechanism, compass functionality
+    - [ ] **Voltage/Current Monitoring**: Power consumption tracking, charging status detection
+    - [ ] **Audio Level Monitoring**: Microphone input levels, speaker output monitoring
+    - [ ] **System Health Sensors**: Watchdog timers, power-on reset detection, brown-out detection
   - [ ] **Internal Interfaces and Bus Systems**: Complete mapping of all hardware interfaces:
     - [ ] **GPIO Mapping**: All GPIO pins, assignments, directions, pull-ups/downs, interrupt capabilities
     - [ ] **I2C Buses**: I2C controllers, device addresses, clock speeds, power management integration
