@@ -49,6 +49,19 @@ This document outlines a phased approach to creating a community-maintained Armb
   - [ ] **Audio System**: Codec (sun8i), amplifier, headphone detection, ALSA configuration  
   - [ ] **Connectivity**: WiFi (RTL8821CS), Bluetooth, HDMI output, USB-OTG functionality
   - [ ] **Special Features**: Lid open/close detection, battery management, charging status
+  - [ ] **Internal Interfaces and Bus Systems**: Complete mapping of all hardware interfaces:
+    - [ ] **GPIO Mapping**: All GPIO pins, assignments, directions, pull-ups/downs, interrupt capabilities
+    - [ ] **I2C Buses**: I2C controllers, device addresses, clock speeds, power management integration
+    - [ ] **SPI Buses**: SPI controllers, chip selects, display/storage/sensor connections
+    - [ ] **USB Interfaces**: USB-OTG, USB-Host, PHY configurations, power delivery
+    - [ ] **UART/Serial**: Console UART, Bluetooth UART, debug interfaces, pinmux configurations
+    - [ ] **ADC Channels**: Analog-to-digital converters for joysticks, battery monitoring, sensors
+    - [ ] **PWM Controllers**: Backlight control, fan control, LED brightness, audio amplifiers
+    - [ ] **Clock Management**: Clock trees, PLLs, clock domains, power gating
+    - [ ] **Power Management**: Voltage regulators, power domains, sleep/wake configurations
+    - [ ] **Interrupt Controllers**: IRQ mappings, GPIO interrupts, hardware interrupt priorities
+    - [ ] **DMA Controllers**: Direct Memory Access for audio, display, high-speed peripherals
+    - [ ] **Memory Interfaces**: DDR controller settings, memory mapping, cache configurations
 - [x] **Search for Similar Projects**: Perform detailed websearching to determine what Linux distributions are available for this platform.
 - [x] **Copy Reference Repositories**: Update the helper script to pull in the related repositories for other linux projects for this device.
 - [ ] **Alternative Implementation Analysis**: Research how each distribution handles hardware components:
